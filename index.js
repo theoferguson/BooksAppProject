@@ -24,12 +24,7 @@ function renderForm() {
     })
 }
 
-function getCharsFromSwapi(){
-    fetch('https://swapi.dev/api/people/1')
-    .then((resp) => resp.json())
-    .then(swapiChar => normalizeData(swapiChar, "https://upload.wikimedia.org/wikipedia/en/9/9b/Luke_Skywalker.png"))
-}
-
+//review to ensure normalizeData still catches json object properly
 function normalizeData(eachChar, imageURL){
     let charObject = {
         name: eachChar.name,
@@ -44,7 +39,55 @@ function normalizeData(eachChar, imageURL){
 
     }
     console.log(charObject)
+}
 
+function renderCard(object) {
+    let charCard = document.createElement('div')
+    charCard.className = "SW character card"
+
+    let cardName = document.createElement('div')
+    cardName.textContent = object.name
+    charCard.append(cardName)
+
+    let cardHeight = document.createElement('div')
+    cardHeight.textContent = object.height
+    charCard.append(cardHeight)
+
+    let cardMass = document.createElement('div')
+    cardMass.textContent = object.mass
+    charCard.append(cardMass)
+
+    let cardHairColor = document.createElement('div')
+    cardHairColor.textContent = object.hairColor
+    charCard.append(cardHairColor)
+
+    let cardSkinColor = document.createElement('div')
+    cardSkinColor.textContent = object.skinColor
+    charCard.append(cardSkinColor)
+
+    let cardEyeColor = document.createElement('div')
+    cardEyeColor.textContent = object.eyeColor
+    charCard.append(cardEyeColor)
+
+    let cardBirthYear = document.createElement('div')
+    cardBirthYear.textContent = object.birthYear
+    charCard.append(cardBirthYear)
+
+    let cardGender = document.createElement('div')
+    cardGender.textContent = object.gender
+    charCard.append(cardGender)
+
+    let cardImage = document.createElement('image')
+    cardImage.src = object.image
+    charCard.append(cardImage)
+    
+    document.querySelector("#container").append(charCard)
+}
+
+function getCharsFromSwapi(){
+    fetch('https://swapi.dev/api/people/1')
+    .then((resp) => resp.json())
+    .then(swapiChar => normalizeData(swapiChar, "https://upload.wikimedia.org/wikipedia/en/9/9b/Luke_Skywalker.png"))
 }
 
 getCharsFromSwapi();
