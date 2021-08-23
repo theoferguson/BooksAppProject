@@ -1,0 +1,67 @@
+html {
+    height: 100%;
+    width: 100%;
+    font-family: "Titillium Web", sans-serif;
+  }
+  
+  body {
+    min-height: 100%;
+    min-width: 100%;
+    background: linear-gradient(rgb(61, 13, 192), black);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  }
+  
+  button {
+    font-size: 7px;
+  }
+
+#pageTitleSL {
+    display: block;
+    text-align: center;
+}
+  
+label {
+    font-size: x-large;
+    color: white;
+}
+
+  #main-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #333;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 15px 20px 18px 18px;
+    border-radius: 5px;
+    box-shadow: 2px 5px 5px #333;
+    
+  }
+  
+  #list {
+    margin: 10px;
+    border: 1px solid #333;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 15px 20px 18px 18px;
+    border-radius: 5px;
+    box-shadow: 2px 5px 5px #333;
+  }
+  
+  .card {
+    text-align: center;
+    background-color: antiquewhite;
+    border: grey solid 1px;
+    padding: 1rem;
+    width: 15rem;
+    height: 30rem;
+    display: inline-grid;
+    margin: 1rem 2rem;
+    box-shadow: 3px 4px #e04b52
+  }
+
+  #header {
+      display: block;
+      text-align: center;
+      
+  }

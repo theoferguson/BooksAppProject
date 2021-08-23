@@ -1,5 +1,6 @@
 function renderForm() {
     const inputForm = document.createElement("form")
+    inputForm.id = "starloveform"
     inputForm.innerHTML =
         '<label for="searchByCharName">Search for SW Characters</label> ' +
         '<input id="searchByCharName" type="text" placeholder="Enter SW Character Name here"/> ' +
