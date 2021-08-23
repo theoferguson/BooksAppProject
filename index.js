@@ -25,17 +25,16 @@ function renderForm() {
     })
 }
 
-//review to ensure normalizeData still catches json object properly
 function normalizeData(eachChar, imageURL){
     let charObject = {
-        name: eachChar.name,
-        height: eachChar.height,
-        mass: eachChar.mass,
-        hairColor: eachChar.hair_color,
-        skinColor: eachChar.skin_color,
-        eyeColor: eachChar.eye_color,
-        birthYear: eachChar.birth_year,
-        gender: eachChar.gender,
+        name: eachChar.results[0].name,
+        height: eachChar.results[0].height,
+        mass: eachChar.results[0].mass,
+        hairColor: eachChar.results[0].hair_color,
+        skinColor: eachChar.results[0].skin_color,
+        eyeColor: eachChar.results[0].eye_color,
+        birthYear: eachChar.results[0].birth_year,
+        gender: eachChar.results[0].gender,
         image: imageURL
 
     }
@@ -85,14 +84,6 @@ function renderCard(object) {
 
     document.querySelector("#container").append(charCard)
 }
-
-function getCharsFromSwapi(){
-    fetch('https://swapi.dev/api/people/1')
-    .then((resp) => resp.json())
-    .then(swapiChar => normalizeData(swapiChar, "https://upload.wikimedia.org/wikipedia/en/9/9b/Luke_Skywalker.png"))
-}
-
-getCharsFromSwapi();
 
 function init() {
     renderForm()
