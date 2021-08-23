@@ -7,16 +7,21 @@ function renderForm() {
         '<input type="submit" />';
     document.querySelector("#header").append(inputForm)
 
-
     inputForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        console.log(event)
+        console.log(inputForm.querySelector("#searchByCharName").value)
+        console.log(inputForm.querySelector("#imageInput").value)
+
+        fetch('https://swapi.dev/api/people/')
+            .then(res => res.json())
+            .then(json => {
+                console.log(json)
+            })
+
         inputForm.reset();
 
     })
 }
-
-
 
 function getCharsFromSwapi(){
     fetch('https://swapi.dev/api/people/1')
