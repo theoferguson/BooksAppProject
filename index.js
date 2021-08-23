@@ -5,12 +5,12 @@ function renderForm() {
         '<input id="searchByCharName" type="text" placeholder="Enter SW Character Name here"/> ' +
         '<input id="imageInput" type="text" placeholder="Enter image URL here"/> ' +
         '<input type="submit" />';
-    document.querySelector("header").append(inputForm).value
+    document.querySelector("#header").append(inputForm)
 
 
     inputForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        // to be written
+        console.log(event)
         inputForm.reset();
 
     })
@@ -42,3 +42,10 @@ function normalizeData(eachChar, imageURL){
 }
 
 getCharsFromSwapi();
+
+function init() {
+    renderForm()
+
+}
+
+init()
