@@ -16,7 +16,8 @@ function renderForm() {
         fetch(`https://swapi.dev/api/people/?search=${searchName}`)
             .then(res => res.json())
             .then(json => {
-                console.log(json)
+                console.log(json, newUrl)
+                normalizeData(json, newUrl)
             })
 
         inputForm.reset();
@@ -39,6 +40,7 @@ function normalizeData(eachChar, imageURL){
 
     }
     console.log(charObject)
+    renderCard(charObject)
 }
 
 function renderCard(object) {
@@ -77,10 +79,10 @@ function renderCard(object) {
     cardGender.textContent = object.gender
     charCard.append(cardGender)
 
-    let cardImage = document.createElement('image')
+    let cardImage = document.createElement('img')
     cardImage.src = object.image
     charCard.append(cardImage)
-    
+
     document.querySelector("#container").append(charCard)
 }
 
