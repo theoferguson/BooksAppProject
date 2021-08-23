@@ -9,10 +9,11 @@ function renderForm() {
 
     inputForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        console.log(inputForm.querySelector("#searchByCharName").value)
-        console.log(inputForm.querySelector("#imageInput").value)
+        let searchName = inputForm.querySelector("#searchByCharName").value
+        let newUrl = inputForm.querySelector("#imageInput").value
 
-        fetch('https://swapi.dev/api/people/')
+
+        fetch(`https://swapi.dev/api/people/?search=${searchName}`)
             .then(res => res.json())
             .then(json => {
                 console.log(json)
