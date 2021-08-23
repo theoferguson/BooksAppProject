@@ -1,6 +1,5 @@
 function renderForm() {
     const inputForm = document.createElement("form")
-    inputForm.id = "starloveform"
     inputForm.innerHTML =
         '<label for="searchByCharName">Search for SW Characters</label> ' +
         '<input id="searchByCharName" type="text" placeholder="Enter SW Character Name here"/> ' +
@@ -37,7 +36,6 @@ function normalizeData(eachChar, imageURL){
         birthYear: eachChar.results[0].birth_year,
         gender: eachChar.results[0].gender,
         image: imageURL
-
     }
     console.log(charObject)
     renderCard(charObject)
@@ -83,7 +81,45 @@ function renderCard(object) {
     cardImage.src = object.image
     charCard.append(cardImage)
 
+    let favoriteButton = document.createElement('button')
+    favoriteButton.textContent = '\u2661'
+    favoriteButton.addEventListener('click', () => {
+        favoriteCard(favoriteButton, object)
+    })
+    charCard.append(favoriteButton)
+
+    let deleteButton = document.createElement('button')
+    deleteButton.textContent = "X"
+    deleteButton.addEventListener('click', () => {
+        deleteCard(charCard)
+        charCard.remove()
+    })
+    charCard.append(deleteButton)
+
     document.querySelector("#container").append(charCard)
+}
+
+function favoriteCard(button, object) {
+    button.textContent = '\u2665'
+
+    fetch("http://localhost:3000/characters", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    },
+    body: JSON.stringify(object)
+})
+}
+
+function deleteCard(object) {
+    let deleteId = object.id
+    fetch(`http://localhost:3000/characters/${deleteId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json'
+        }
+    })
 }
 
 function init() {
