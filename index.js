@@ -157,9 +157,41 @@ function deleteCard(object) {
     })
 }
 
+function renderPopChar() {
+    const initialLoadChar = [
+        {
+            name: "luke skywalker",
+            image: "https://upload.wikimedia.org/wikipedia/en/9/9b/Luke_Skywalker.png"
+        }, 
+        {
+            name: "han solo", 
+            image: "https://upload.wikimedia.org/wikipedia/en/b/be/Han_Solo_depicted_in_promotional_image_for_Star_Wars_%281977%29.jpg"
+        },
+        {
+            name: "leia", 
+            image: "https://upload.wikimedia.org/wikipedia/en/1/1b/Princess_Leia%27s_characteristic_hairstyle.jpg"
+        },
+        {
+            name: "chewbacca", 
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8R9jrzDNzdxn60cdbmNvpsNKxvvwvbsFHxdJfTW8peRrGPZFQmZKRXCo6I1IrbQUTQJk&usqp=CAU"
+        }
+    ]
+    console.log(initialLoadChar)
+    initialLoadChar.forEach(character => {
+        fetch(`https://swapi.dev/api/people/?search=${character.name}`)
+            .then(res => res.json())
+            .then(json => {
+                console.log(json, character.image)
+                normalizeData(json, character.image)
+            })
+    })
+}
+
+
+
 function init() {
     renderForm()
-
+    renderPopChar()
 }
 
 init()
