@@ -57,6 +57,8 @@ function renderCard(object) {
     let charCard = document.createElement('div')
     charCard.className = "SW character card"
 
+    console.log(object)
+
     let cardName = document.createElement('div')
     cardName.className = "CardName"
     cardName.textContent = object.name
@@ -117,7 +119,7 @@ function renderCard(object) {
     deleteButton.className = "DeleteButton"
     deleteButton.textContent = "X"
     deleteButton.addEventListener('click', () => {
-        deleteCard(charCard)
+        deleteCard(object)
         charCard.remove()
     })
     charCard.append(deleteButton)
@@ -136,12 +138,12 @@ function favoriteCard(button, object, numberOfFavorites) {
     },
     body: JSON.stringify(object)
     })
-        .then(res => res.json())
-        .then(json => {
-            console.log(object)
-            object.id = json.id
-            console.log(object)
-        })
+        // .then(res => res.json())
+        // .then(json => {
+            // console.log(object)
+            // object.id = json.id
+            // console.log(object)
+        // })
 }
 
 function deleteCard(object) {
