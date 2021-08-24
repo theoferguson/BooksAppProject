@@ -1,7 +1,7 @@
 function renderForm() {
     const inputForm = document.createElement("form")
     inputForm.innerHTML =
-        '<label for="searchByCharName">Search for SW Characters</label> ' +
+        '<label for="searchByCharName">Search for SW Characters: </label> ' +
         '<input id="searchByCharName" type="text" placeholder="Enter SW Character Name here"/> ' +
         '<input id="imageInput" type="text" placeholder="Enter image URL here"/> ' +
         '<input type="submit" />';
@@ -46,42 +46,52 @@ function renderCard(object) {
     charCard.className = "SW character card"
 
     let cardName = document.createElement('div')
+    cardName.className = "CardName"
     cardName.textContent = object.name
     charCard.append(cardName)
 
     let cardHeight = document.createElement('div')
+    cardHeight.className = "CardHeight"
     cardHeight.textContent = object.height
     charCard.append(cardHeight)
 
     let cardMass = document.createElement('div')
+    cardMass.className = "CardMass"
     cardMass.textContent = object.mass
     charCard.append(cardMass)
 
     let cardHairColor = document.createElement('div')
+    cardHairColor.className = "CardHairColor"
     cardHairColor.textContent = object.hairColor
     charCard.append(cardHairColor)
 
     let cardSkinColor = document.createElement('div')
+    cardSkinColor.className = "CardSkinColor"
     cardSkinColor.textContent = object.skinColor
     charCard.append(cardSkinColor)
 
     let cardEyeColor = document.createElement('div')
+    cardEyeColor.className = "CardEyeColor"
     cardEyeColor.textContent = object.eyeColor
     charCard.append(cardEyeColor)
 
     let cardBirthYear = document.createElement('div')
+    cardBirthYear.className = "CardBirthYear"
     cardBirthYear.textContent = object.birthYear
     charCard.append(cardBirthYear)
 
     let cardGender = document.createElement('div')
+    cardGender.className = "CardGender"
     cardGender.textContent = object.gender
     charCard.append(cardGender)
 
     let cardImage = document.createElement('img')
+    cardImage.className = "CardImage"
     cardImage.src = object.image
     charCard.append(cardImage)
 
     let favoriteButton = document.createElement('button')
+    favoriteButton.className = "FavButton"
     favoriteButton.textContent = '\u2661'
     favoriteButton.addEventListener('click', () => {
         favoriteCard(favoriteButton, object)
@@ -89,6 +99,7 @@ function renderCard(object) {
     charCard.append(favoriteButton)
 
     let deleteButton = document.createElement('button')
+    deleteButton.className = "DeleteButton"
     deleteButton.textContent = "X"
     deleteButton.addEventListener('click', () => {
         deleteCard(charCard)
