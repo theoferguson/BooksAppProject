@@ -52,37 +52,37 @@ function renderCard(object) {
 
     let cardHeight = document.createElement('div')
     cardHeight.className = "CardHeight"
-    cardHeight.textContent = object.height
+    cardHeight.textContent = `Height: ${object.height}`
     charCard.append(cardHeight)
 
     let cardMass = document.createElement('div')
     cardMass.className = "CardMass"
-    cardMass.textContent = object.mass
+    cardMass.textContent = `Mass: ${object.mass}`
     charCard.append(cardMass)
 
     let cardHairColor = document.createElement('div')
     cardHairColor.className = "CardHairColor"
-    cardHairColor.textContent = object.hairColor
+    cardHairColor.textContent = `Hair Color: ${object.hairColor}`
     charCard.append(cardHairColor)
 
     let cardSkinColor = document.createElement('div')
     cardSkinColor.className = "CardSkinColor"
-    cardSkinColor.textContent = object.skinColor
+    cardSkinColor.textContent = `Skin Color:   ${object.skinColor}`
     charCard.append(cardSkinColor)
 
     let cardEyeColor = document.createElement('div')
     cardEyeColor.className = "CardEyeColor"
-    cardEyeColor.textContent = object.eyeColor
+    cardEyeColor.textContent = `Eye Color:   ${object.eyeColor}`
     charCard.append(cardEyeColor)
 
     let cardBirthYear = document.createElement('div')
     cardBirthYear.className = "CardBirthYear"
-    cardBirthYear.textContent = object.birthYear
+    cardBirthYear.textContent = `Birth Year:   ${object.birthYear}`
     charCard.append(cardBirthYear)
 
     let cardGender = document.createElement('div')
     cardGender.className = "CardGender"
-    cardGender.textContent = object.gender
+    cardGender.textContent = `Gender:   ${object.gender}`
     charCard.append(cardGender)
 
     let cardImage = document.createElement('img')
