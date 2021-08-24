@@ -109,11 +109,18 @@ function favoriteCard(button, object) {
         "Accept": "application/json"
     },
     body: JSON.stringify(object)
-})
+    })
+        .then(res => res.json())
+        .then(json => {
+            console.log(object)
+            object.id = json.id
+            console.log(object)
+        })
 }
 
 function deleteCard(object) {
     let deleteId = object.id
+    console.log(deleteId)
     fetch(`http://localhost:3000/characters/${deleteId}`, {
         method: 'DELETE',
         headers: {
