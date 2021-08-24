@@ -38,7 +38,19 @@ function normalizeData(eachChar, imageURL){
         image: imageURL
     }
     console.log(charObject)
-    renderCard(charObject)
+    fetch("http://localhost:3000/characters", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    },
+    body: JSON.stringify(charObject)
+    })
+        .then(res => res.json())
+        .then(temptStoreData => {
+            renderCard(temptStoreData)
+            deleteCard(temptStoreData)
+        })
 }
 
 function renderCard(object) {
@@ -90,11 +102,14 @@ function renderCard(object) {
     cardImage.src = object.image
     charCard.append(cardImage)
 
+    let numberOfFavorites = document.createElement('h4')
+    numberOfFavorites.textContent = 0
+
     let favoriteButton = document.createElement('button')
     favoriteButton.className = "FavButton"
-    favoriteButton.textContent = '\u2661'
+    favoriteButton.textContent = `\u2661: ${numberOfFavorites.textContent}`
     favoriteButton.addEventListener('click', () => {
-        favoriteCard(favoriteButton, object)
+        favoriteCard(favoriteButton, object, numberOfFavorites)
     })
     charCard.append(favoriteButton)
 
@@ -110,8 +125,8 @@ function renderCard(object) {
     document.querySelector("#container").append(charCard)
 }
 
-function favoriteCard(button, object) {
-    button.textContent = '\u2665'
+function favoriteCard(button, object, numberOfFavorites) {
+    button.textContent = `\u2665: ${++numberOfFavorites.textContent}`
 
     fetch("http://localhost:3000/characters", {
         method: "POST",
