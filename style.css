@@ -1,165 +1,165 @@
 @font-face {
-    src: url(assets/Starjedi.ttf);
-    font-family: starjedi;
+  src: url(assets/Starjedi.ttf);
+  font-family: starjedi;
 
 }
 
 
 
 html {
-    height: 100%;
-    width: 100%;
-    font-family: "Titillium Web", sans-serif;
-  }
-  
-  body {
-    min-height: 100%;
-    min-width: 100%;
-    background: linear-gradient(rgb(61, 13, 192), black);
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  }
-  
-  button {
-    font-size: 7px;
-  }
+  height: 100%;
+  width: 100%;
+  font-family: "Titillium Web", sans-serif;
+}
+
+body {
+  min-height: 100%;
+  min-width: 100%;
+  background: linear-gradient(rgb(61, 13, 192), black);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+button {
+  font-size: 7px;
+}
 
 #pageTitleSL {
-    display: block;
-    text-align: center;
-    font-family: starjedi;
-    color: rgba(255, 255, 0, 0.911);
-    font-size: x-large;
+  display: block;
+  text-align: center;
+  font-family: starjedi;
+  color: rgba(255, 255, 0, 0.911);
+  font-size: x-large;
 }
-  
+
 label {
-    font-size: x-large;
-    color: white;
+  font-size: x-large;
+  color: white;
 }
 
-  #main-content {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border: 1px solid #333;
-    background: rgba(255, 255, 255, 0.3);
-    padding: 15px 20px 18px 18px;
-    border-radius: 5px;
-    box-shadow: 2px 5px 5px #333;
+#main-content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #333;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 15px 20px 18px 18px;
+  border-radius: 5px;
+  box-shadow: 2px 5px 5px #333;
+  
+}
+
+#list {
+  margin: 10px;
+  border: 1px solid #333;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 15px 20px 18px 18px;
+  border-radius: 5px;
+  box-shadow: 2px 5px 5px #333;
+}
+
+.card {
+  text-align: center;
+  background-color: antiquewhite;
+  border: grey solid 1px;
+  padding: 1rem;
+  width: 18rem;
+  height: 35rem;
+  display: inline-grid;
+  margin: 1rem 2rem;
+  box-shadow: 3px 4px #cbdf18
+}
+
+#header {
+    display: block;
+    text-align: center;
     
-  }
-  
-  #list {
-    margin: 10px;
-    border: 1px solid #333;
-    background: rgba(255, 255, 255, 0.75);
-    padding: 15px 20px 18px 18px;
-    border-radius: 5px;
-    box-shadow: 2px 5px 5px #333;
-  }
-  
-  .card {
-    text-align: center;
-    background-color: antiquewhite;
-    border: grey solid 1px;
-    padding: 1rem;
-    width: 18rem;
-    height: 35rem;
-    display: inline-grid;
-    margin: 1rem 2rem;
-    box-shadow: 3px 4px #cbdf18
-  }
+}
 
-  #header {
-      display: block;
-      text-align: center;
-      
-  }
+.CardName {
+  display: block;
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bold;
 
-  .CardName {
+}
+
+.CardHeight {
     display: block;
     text-align: center;
-    font-size: xx-large;
-    font-weight: bold;
+    width: auto;
+    font-weight: bold;     
+}
 
-  }
-
-  .CardHeight {
-      display: block;
-      position: relative; left: 130px;
-      width: 100px;
-      font-weight: bold;     
-  }
-
-  .CardMass {
-    display: block;
-      position: relative; left: 130px;
-      width: 100px;
-      font-weight: bold; 
-  }
-
-  .CardHairColor {
-    display: block;
-    position: relative; left: 130px;
-    width: 100px;
+.CardMass {
+  display: block;
+    text-align: center;
+    width: auto;
     font-weight: bold; 
-  }
+}
 
-  .CardSkinColor {
+.CardHairColor {
+  display: block;
+  text-align: center;
+  width: auto;
+  font-weight: bold; 
+}
+
+.CardSkinColor {
+  display: block;
+  text-align: center;
+  width: auto;
+  font-weight: bold; 
+}
+
+.CardEyeColor {
+  display: block;
+  text-align: center;
+  width: auto;
+  font-weight: bold; 
+}
+
+.CardBirthYear {
+  display: block;
+  text-align: center;
+  width: auto;
+  font-weight: bold; 
+}
+
+.CardGender {
+  display: block;
+  text-align: center;
+  width: auto;
+  font-weight: bold; 
+}
+
+.CardImage {
     display: block;
-    position: relative; left: 130px;
-    width: 100px;
-    font-weight: bold; 
-  }
-
-  .CardEyeColor {
-    display: block;
-    position: relative; left: 130px;
-    width: 100px;
-    font-weight: bold; 
-  }
-
-  .CardBirthYear {
-    display: block;
-    position: relative; left: 130px;
-    width: 100px;
-    font-weight: bold; 
-  }
-
-  .CardGender {
-    display: block;
-    position: relative; left: 130px;
-    width: 100px;
-    font-weight: bold; 
-  }
-
-  .CardImage {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
-      height: 100%;
-      max-height: 300px;
-      max-width: 200px;
-
-       
-  }
-
-  .FavButton {
-    display: block;  
-    width: 50%;
-    height: 20px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
-  }
+    width: 100%;
+    height: 100%;
+    max-height: 300px;
+    max-width: 200px;
 
-  .DeleteButton {
-    display: block;  
-    width: 50%;
-    height: 20px;
-    margin-left: auto;
-    margin-right: auto;
+     
+}
 
-  }
+.FavButton {
+  display: block;  
+  width: 50%;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.DeleteButton {
+  display: block;  
+  width: 50%;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
