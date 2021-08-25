@@ -69,6 +69,7 @@ function renderNormalizedSearch(charObject) {
 
 function renderInitChars(charObject) {
     charObject.likes = 0
+    charObject.comment =""
     renderCard(charObject, "#initialRenderContainer")
 }
 
