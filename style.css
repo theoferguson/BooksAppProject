@@ -163,3 +163,9 @@ label {
   margin-right: auto;
 
 }
+
+.descriptorPanel {
+  text-align: center;
+  font-size: x-large;
+  color: rgb(231, 235, 21);
+}

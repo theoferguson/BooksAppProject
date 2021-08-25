@@ -16,8 +16,8 @@ function renderForm() {
         fetch(`https://swapi.dev/api/people/?search=${searchName}`)
             .then(res => res.json())
             .then(json => {
-                console.log(json, newUrl)
-                normalizeData(json, newUrl)
+                const swCharacter = normalizeData(json, newUrl)
+                renderNormalizedSearch(swCharacter)                                
             })
 
         inputForm.reset();
@@ -35,8 +35,45 @@ function normalizeData(eachChar, imageURL){
         eyeColor: eachChar.results[0].eye_color,
         birthYear: eachChar.results[0].birth_year,
         gender: eachChar.results[0].gender,
+        likes: eachChar.likes || 0,
+        id: eachChar.id,
         image: imageURL
     }
+    return charObject
+}
+//AUTOMATICALLY RENDER FAVORITES
+function renderFavoritesAuto() {
+    fetch("http://localhost:3000/characters")
+    .then(res => res.json())
+    .then(characters => characters.forEach(eachFav => renderCard(eachFav, "#favoritesContainer")))
+}
+
+// RENDER PROCESS FOR SEARCHED CHARS
+function renderNormalizedSearch(charObject) {
+console.log(charObject)
+fetch("http://localhost:3000/characters", {
+    method: "POST",
+    headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+},
+body: JSON.stringify(charObject)
+})
+    .then(res => res.json())
+    .then(temptStoreData => {
+        renderCard(temptStoreData, "#favoritesContainer")
+        deleteCard(temptStoreData)
+    })
+}
+
+function renderInitChars(charObject) {
+    charObject.likes = 0
+    renderCard(charObject, "#initialRenderContainer")
+}
+
+/*
+// RENDER PROCESS PLACES IN INITIAL CHARACTER RENDER DIV
+function renderInitChars(charObject) {
     console.log(charObject)
     fetch("http://localhost:3000/characters", {
         method: "POST",
@@ -48,16 +85,14 @@ function normalizeData(eachChar, imageURL){
     })
         .then(res => res.json())
         .then(temptStoreData => {
-            renderCard(temptStoreData)
+            renderCard(temptStoreData, "#initialRenderContainer")
             deleteCard(temptStoreData)
         })
 }
-
-function renderCard(object) {
+*/
+function renderCard(object, renderLocale) {
     let charCard = document.createElement('div')
     charCard.className = "SW character card"
-
-    console.log(object)
 
     let cardName = document.createElement('div')
     cardName.className = "CardName"
@@ -104,14 +139,11 @@ function renderCard(object) {
     cardImage.src = object.image
     charCard.append(cardImage)
 
-    let numberOfFavorites = document.createElement('h4')
-    numberOfFavorites.textContent = 0
-
     let favoriteButton = document.createElement('button')
     favoriteButton.className = "FavButton"
-    favoriteButton.textContent = `\u2661: ${numberOfFavorites.textContent}`
+    favoriteButton.textContent = `\u2661: ${object.likes}`
     favoriteButton.addEventListener('click', () => {
-        favoriteCard(favoriteButton, object, numberOfFavorites)
+        favoriteCard(favoriteButton, object)
     })
     charCard.append(favoriteButton)
 
@@ -124,13 +156,15 @@ function renderCard(object) {
     })
     charCard.append(deleteButton)
 
-    document.querySelector("#container").append(charCard)
+    document.querySelector(renderLocale).append(charCard)
 }
 
-function favoriteCard(button, object, numberOfFavorites) {
-    button.textContent = `\u2665: ${++numberOfFavorites.textContent}`
-
-    fetch("http://localhost:3000/characters", {
+function favoriteCard(button, object) {
+    button.textContent = `\u2665: ${parseInt(object.likes)+1}`
+    
+    if (object.likes === 0){
+        ++object.likes
+        fetch("http://localhost:3000/characters", {
         method: "POST",
         headers: {
         "Content-Type": "application/json",
@@ -138,17 +172,23 @@ function favoriteCard(button, object, numberOfFavorites) {
     },
     body: JSON.stringify(object)
     })
-        // .then(res => res.json())
-        // .then(json => {
-            // console.log(object)
-            // object.id = json.id
-            // console.log(object)
-        // })
+    }
+    else {
+        ++object.likes
+        fetch(`http://localhost:3000/characters/${object.id}`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",            
+            },
+            body: JSON.stringify({likes: object.likes})
+
+        })
+    }
+
 }
 
 function deleteCard(object) {
     let deleteId = object.id
-    console.log(deleteId)
     fetch(`http://localhost:3000/characters/${deleteId}`, {
         method: 'DELETE',
         headers: {
@@ -173,33 +213,52 @@ function renderPopChar() {
         },
         {
             name: "chewbacca", 
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8R9jrzDNzdxn60cdbmNvpsNKxvvwvbsFHxdJfTW8peRrGPZFQmZKRXCo6I1IrbQUTQJk&usqp=CAU"
+            image: "https://cdn.europosters.eu/image/750/posters/star-wars-the-last-jedi-chewbacca-bowcaster-i50096.jpg"
+        },
+        {
+            name: "darth maul",
+            image: "https://i.pinimg.com/originals/5e/e0/de/5ee0de9ac416870fb7da5e384da4b323.jpg"
+        },
+        {
+            name: "palpatine",
+            image: "https://qph.fs.quoracdn.net/main-qimg-631a20284188008603ec6a4a82ad643d"
+        },
+        {
+            name: "lando",
+            image: "https://bamfstyle.com/wp-content/uploads/2019/05/lando-main1.jpg"
+        },
+        {
+            name: "obi wan",
+            image: "https://static.wikia.nocookie.net/starwars/images/4/4e/ObiWanHS-SWE.jpg/revision/latest?cb=20111115052816"
         }
     ]
-    console.log(initialLoadChar)
     initialLoadChar.forEach(character => {
         fetch(`https://swapi.dev/api/people/?search=${character.name}`)
             .then(res => res.json())
             .then(json => {
                 console.log(json, character.image)
-                normalizeData(json, character.image)
+                const initChars = normalizeData(json, character.image)
+                renderInitChars(initChars)
             })
     })
-    fetch(`http://localhost:3000/characters/`)
-        .then(res => res.json())
-        .then(json => {
-            console.log(json)
-            json.forEach(character => {
-                renderCard(character)
-            })
-        })
     
 }
 
+function giveSeperatorsText(){
+    document.querySelector("#myFavoritesDescrip").textContent = "My Favorited StarWars Characters: "
+    document.querySelector("#myFavoritesDescrip").className = "descriptorPanel"
+
+
+    document.querySelector("#popularCharactersDescrip").textContent = "Popular StarWars Characters: "
+    document.querySelector("#popularCharactersDescrip").className = "descriptorPanel"
+
+}
 
 
 function init() {
+    giveSeperatorsText()
     renderForm()
+    renderFavoritesAuto()
     renderPopChar()
 }
 
