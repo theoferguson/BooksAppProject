@@ -17,7 +17,7 @@ function renderForm() {
             .then(res => res.json())
             .then(json => {
                 const swCharacter = normalizeData(json, newUrl)
-                renderNormalizedSearch(swCharacter)                                
+                renderNormalizedSearch(swCharacter)
             })
 
         inputForm.reset();
@@ -25,7 +25,7 @@ function renderForm() {
     })
 }
 
-function normalizeData(eachChar, imageURL){
+function normalizeData(eachChar, imageURL) {
     let charObject = {
         name: eachChar.results[0].name,
         height: eachChar.results[0].height,
@@ -41,29 +41,30 @@ function normalizeData(eachChar, imageURL){
     }
     return charObject
 }
+
 //AUTOMATICALLY RENDER FAVORITES
 function renderFavoritesAuto() {
     fetch("http://localhost:3000/characters")
-    .then(res => res.json())
-    .then(characters => characters.forEach(eachFav => renderCard(eachFav, "#favoritesContainer")))
+        .then(res => res.json())
+        .then(characters => characters.forEach(eachFav => renderCard(eachFav, "#favoritesContainer")))
 }
 
 // RENDER PROCESS FOR SEARCHED CHARS
 function renderNormalizedSearch(charObject) {
-console.log(charObject)
-fetch("http://localhost:3000/characters", {
-    method: "POST",
-    headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json"
-},
-body: JSON.stringify(charObject)
-})
-    .then(res => res.json())
-    .then(temptStoreData => {
-        renderCard(temptStoreData, "#favoritesContainer")
-        deleteCard(temptStoreData)
+    console.log(charObject)
+    fetch("http://localhost:3000/characters", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(charObject)
     })
+        .then(res => res.json())
+        .then(temptStoreData => {
+            renderCard(temptStoreData, "#favoritesContainer")
+            deleteCard(temptStoreData)
+        })
 }
 
 function renderInitChars(charObject) {
@@ -71,25 +72,6 @@ function renderInitChars(charObject) {
     renderCard(charObject, "#initialRenderContainer")
 }
 
-/*
-// RENDER PROCESS PLACES IN INITIAL CHARACTER RENDER DIV
-function renderInitChars(charObject) {
-    console.log(charObject)
-    fetch("http://localhost:3000/characters", {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-    },
-    body: JSON.stringify(charObject)
-    })
-        .then(res => res.json())
-        .then(temptStoreData => {
-            renderCard(temptStoreData, "#initialRenderContainer")
-            deleteCard(temptStoreData)
-        })
-}
-*/
 function renderCard(object, renderLocale) {
     let charCard = document.createElement('div')
     charCard.className = "SW character card"
@@ -147,6 +129,21 @@ function renderCard(object, renderLocale) {
     })
     charCard.append(favoriteButton)
 
+    let commentSection = document.createElement('form')
+    commentSection.className = "CommentSection"
+    commentSection.innerHTML =
+        '<label for="commentHere"></label> ' +
+        '<input id="commentHere" type="text" placeholder="Leave your note here"/> ' +
+        '<input type="submit" />' +
+        `<div class="comment">${object.comment}</div>`
+    commentSection.addEventListener('submit', (e) => {
+        e.preventDefault()
+        leaveAComment(object, commentSection)
+        commentSection.reset()
+    })
+    charCard.append(commentSection)
+
+
     let deleteButton = document.createElement('button')
     deleteButton.className = "DeleteButton"
     deleteButton.textContent = "X"
@@ -159,28 +156,51 @@ function renderCard(object, renderLocale) {
     document.querySelector(renderLocale).append(charCard)
 }
 
+function leaveAComment(object, comment) {
+    let submittedComment = comment.querySelector("#commentHere").value
+    console.log(submittedComment)
+    if (submittedComment.length <= 50) {
+        fetch(`http://localhost:3000/characters/${object.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'accept': 'application/json'
+            },
+            body: JSON.stringify({
+                comment: submittedComment
+            })
+        })
+            .then(res => res.json())
+            .then(json => {
+                comment.querySelector("div").textContent = json.comment
+            })
+    } else {
+        alert("please keep your comment short")
+    }
+}
+
 function favoriteCard(button, object) {
-    button.textContent = `\u2665: ${parseInt(object.likes)+1}`
-    
-    if (object.likes === 0){
+    button.textContent = `\u2665: ${parseInt(object.likes) + 1}`
+
+    if (object.likes === 0) {
         ++object.likes
         fetch("http://localhost:3000/characters", {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-    },
-    body: JSON.stringify(object)
-    })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(object)
+        })
     }
     else {
         ++object.likes
-        fetch(`http://localhost:3000/characters/${object.id}`,{
+        fetch(`http://localhost:3000/characters/${object.id}`, {
             method: "PATCH",
             headers: {
-                "Content-Type": "application/json",            
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify({likes: object.likes})
+            body: JSON.stringify({ likes: object.likes })
 
         })
     }
@@ -202,17 +222,17 @@ function renderPopChar() {
         {
             name: "luke skywalker",
             image: "https://upload.wikimedia.org/wikipedia/en/9/9b/Luke_Skywalker.png"
-        }, 
+        },
         {
-            name: "han solo", 
+            name: "han solo",
             image: "https://upload.wikimedia.org/wikipedia/en/b/be/Han_Solo_depicted_in_promotional_image_for_Star_Wars_%281977%29.jpg"
         },
         {
-            name: "leia", 
+            name: "leia",
             image: "https://upload.wikimedia.org/wikipedia/en/1/1b/Princess_Leia%27s_characteristic_hairstyle.jpg"
         },
         {
-            name: "chewbacca", 
+            name: "chewbacca",
             image: "https://cdn.europosters.eu/image/750/posters/star-wars-the-last-jedi-chewbacca-bowcaster-i50096.jpg"
         },
         {
@@ -241,10 +261,10 @@ function renderPopChar() {
                 renderInitChars(initChars)
             })
     })
-    
+
 }
 
-function giveSeperatorsText(){
+function giveSeperatorsText() {
     document.querySelector("#myFavoritesDescrip").textContent = "My Favorited StarWars Characters: "
     document.querySelector("#myFavoritesDescrip").className = "descriptorPanel"
 
