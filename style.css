@@ -166,12 +166,13 @@ label {
 
 .CommentSection {
   display: block;  
-  height: 20px; 
+  height: auto; 
   margin-left: auto;
   margin-right: auto;
 }
 
 .CommentSection .comment {
+  display: block;
   margin-top: 5px;
   background-color: whitesmoke;
   font-family: Math Sans-serif;
