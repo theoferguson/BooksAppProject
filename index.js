@@ -145,14 +145,13 @@ function renderCard(object, renderLocale) {
     commentSection.addEventListener('submit', (e) => {
         e.preventDefault()
         leaveAComment(object, commentSection)
+        if (commentSection.querySelector("#commentHere").value) {
         commentSection.querySelector(".clearComment").hidden = false
+        } else {
+            commentSection.querySelector(".clearComment").hidden = true
+        }
         commentSection.reset()
     })
-    commentSection.querySelector(".clearComment").addEventListener('click', (e) => {
-        e.target.hidden = true
-        console.log(e.target)
-    }
-    )
 
     charCard.append(commentSection)
 
