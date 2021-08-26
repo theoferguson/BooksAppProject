@@ -164,6 +164,19 @@ label {
 
 }
 
+.CommentSection {
+  display: block;  
+  height: 20px; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.CommentSection .comment {
+  margin-top: 5px;
+  background-color: whitesmoke;
+  font-family: Math Sans-serif;
+}
+
 .descriptorPanel {
   text-align: center;
   font-size: x-large;

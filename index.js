@@ -69,7 +69,7 @@ function renderNormalizedSearch(charObject) {
 
 function renderInitChars(charObject) {
     charObject.likes = 0
-    charObject.comment =""
+    charObject.comment = ""
     renderCard(charObject, "#initialRenderContainer")
 }
 
@@ -136,14 +136,25 @@ function renderCard(object, renderLocale) {
         '<label for="commentHere"></label> ' +
         '<input id="commentHere" type="text" placeholder="Leave your note here"/> ' +
         '<input type="submit" />' +
-        `<div class="comment">${object.comment}</div>`
+        `<div class="comment"><div>${object.comment}</div><button class='clearComment'>X</button></div>`
+    if (object.comment) {
+        commentSection.querySelector(".clearComment").hidden = false
+    } else {
+        commentSection.querySelector(".clearComment").hidden = true
+    }
     commentSection.addEventListener('submit', (e) => {
         e.preventDefault()
         leaveAComment(object, commentSection)
+        commentSection.querySelector(".clearComment").hidden = false
         commentSection.reset()
     })
-    charCard.append(commentSection)
+    commentSection.querySelector(".clearComment").addEventListener('click', (e) => {
+        e.target.hidden = true
+        console.log(e.target)
+    }
+    )
 
+    charCard.append(commentSection)
 
     let deleteButton = document.createElement('button')
     deleteButton.className = "DeleteButton"
@@ -160,6 +171,7 @@ function renderCard(object, renderLocale) {
 function leaveAComment(object, comment) {
     let submittedComment = comment.querySelector("#commentHere").value
     console.log(submittedComment)
+
     if (submittedComment.length <= 50) {
         fetch(`http://localhost:3000/characters/${object.id}`, {
             method: 'PATCH',
@@ -173,11 +185,12 @@ function leaveAComment(object, comment) {
         })
             .then(res => res.json())
             .then(json => {
-                comment.querySelector("div").textContent = json.comment
+                comment.querySelector("div").childNodes[0].textContent = json.comment
             })
     } else {
         alert("please keep your comment short")
     }
+
 }
 
 function favoriteCard(button, object) {
