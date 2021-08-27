@@ -38,7 +38,8 @@ function normalizeData(eachChar, imageURL) {
         gender: eachChar.result[0].properties.gender,
         likes: eachChar.likes || 0,
         id: eachChar.id,
-        image: imageURL
+        image: imageURL,
+        comment: eachChar.comment || "" 
     }
     return charObject
 }
@@ -171,7 +172,6 @@ function renderCard(object, renderLocale) {
 function leaveAComment(object, comment) {
     let submittedComment = comment.querySelector("#commentHere").value
     console.log(submittedComment)
-
     if (submittedComment.length <= 50) {
         fetch(`http://localhost:3000/characters/${object.id}`, {
             method: 'PATCH',
@@ -184,9 +184,10 @@ function leaveAComment(object, comment) {
             })
         })
             .then(res => res.json())
-            .then(json => {
+            .then(json => {    
                 comment.querySelector("div").childNodes[0].textContent = json.comment
             })
+            .catch(comment.querySelector("div").childNodes[0].textContent = submittedComment)
     } else {
         alert("please keep your comment short")
     }
