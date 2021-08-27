@@ -39,7 +39,7 @@ function normalizeData(eachChar, imageURL) {
         likes: eachChar.likes || 0,
         id: eachChar.id,
         image: imageURL,
-        comment: eachChar.comment || "" 
+        comment: eachChar.comment || ""
     }
     return charObject
 }
@@ -132,30 +132,32 @@ function renderCard(object, renderLocale) {
     })
     charCard.append(favoriteButton)
 
-    let commentSection = document.createElement('form')
-    commentSection.className = "CommentSection"
-    commentSection.innerHTML =
-        '<label for="commentHere"></label> ' +
-        '<input id="commentHere" type="text" placeholder="Leave your note here"/> ' +
-        '<input type="submit" />' +
-        `<div class="comment"><div>${object.comment}</div><button class='clearComment'>X</button></div>`
-    if (object.comment) {
-        commentSection.querySelector(".clearComment").hidden = false
-    } else {
-        commentSection.querySelector(".clearComment").hidden = true
-    }
-    commentSection.addEventListener('submit', (e) => {
-        e.preventDefault()
-        leaveAComment(object, commentSection)
-        if (commentSection.querySelector("#commentHere").value) {
-        commentSection.querySelector(".clearComment").hidden = false
+    if (renderLocale !== "#initialRenderContainer") {
+        let commentSection = document.createElement('form')
+        commentSection.className = "CommentSection"
+        commentSection.innerHTML =
+            '<label for="commentHere"></label> ' +
+            '<input id="commentHere" type="text" placeholder="Leave your note here"/> ' +
+            '<input type="submit" />' +
+            `<div class="comment"><div>${object.comment}</div><button class='clearComment'>X</button></div>`
+        if (object.comment) {
+            commentSection.querySelector(".clearComment").hidden = false
         } else {
             commentSection.querySelector(".clearComment").hidden = true
         }
-        commentSection.reset()
-    })
+        commentSection.addEventListener('submit', (e) => {
+            e.preventDefault()
+            leaveAComment(object, commentSection)
+            if (commentSection.querySelector("#commentHere").value) {
+                commentSection.querySelector(".clearComment").hidden = false
+            } else {
+                commentSection.querySelector(".clearComment").hidden = true
+            }
+            commentSection.reset()
+        })
 
-    charCard.append(commentSection)
+        charCard.append(commentSection)
+    }
 
     let deleteButton = document.createElement('button')
     deleteButton.className = "DeleteButton"
@@ -184,7 +186,7 @@ function leaveAComment(object, comment) {
             })
         })
             .then(res => res.json())
-            .then(json => {    
+            .then(json => {
                 comment.querySelector("div").childNodes[0].textContent = json.comment
             })
             .catch(comment.querySelector("div").childNodes[0].textContent = submittedComment)

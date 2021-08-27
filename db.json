@@ -13,6 +13,20 @@
       "image": "https://global-uploads.webflow.com/5c4a30834e3cbf8d8d44d1ec/603b5ddf0300cd3f7d6e79e7_a0agvu1033yn67qp239m1maw3dk6h1gx.jpeg",
       "comment": "",
       "id": 1
+    },
+    {
+      "name": "Han Solo",
+      "height": "180",
+      "mass": "80",
+      "hairColor": "brown",
+      "skinColor": "fair",
+      "eyeColor": "brown",
+      "birthYear": "29BBY",
+      "gender": "male",
+      "likes": 1,
+      "image": "https://upload.wikimedia.org/wikipedia/en/b/be/Han_Solo_depicted_in_promotional_image_for_Star_Wars_%281977%29.jpg",
+      "comment": "",
+      "id": 2
     }
   ]
 }
