@@ -13,7 +13,7 @@ function renderForm() {
         let newUrl = inputForm.querySelector("#imageInput").value
 
 
-        fetch(`https://swapi.dev/api/people/?search=${searchName}`)
+        fetch(`https://www.swapi.tech/api/people/?name=${searchName}`)
             .then(res => res.json())
             .then(json => {
                 const swCharacter = normalizeData(json, newUrl)
@@ -25,16 +25,17 @@ function renderForm() {
     })
 }
 
+
 function normalizeData(eachChar, imageURL) {
     let charObject = {
-        name: eachChar.results[0].name,
-        height: eachChar.results[0].height,
-        mass: eachChar.results[0].mass,
-        hairColor: eachChar.results[0].hair_color,
-        skinColor: eachChar.results[0].skin_color,
-        eyeColor: eachChar.results[0].eye_color,
-        birthYear: eachChar.results[0].birth_year,
-        gender: eachChar.results[0].gender,
+        name: eachChar.result[0].properties.name,
+        height: eachChar.result[0].properties.height,
+        mass: eachChar.result[0].properties.mass,
+        hairColor: eachChar.result[0].properties.hair_color,
+        skinColor: eachChar.result[0].properties.skin_color,
+        eyeColor: eachChar.result[0].properties.eye_color,
+        birthYear: eachChar.result[0].properties.birth_year,
+        gender: eachChar.result[0].properties.gender,
         likes: eachChar.likes || 0,
         id: eachChar.id,
         image: imageURL
@@ -233,11 +234,11 @@ function deleteCard(object) {
 function renderPopChar() {
     const initialLoadChar = [
         {
-            name: "luke skywalker",
+            name: "luke",
             image: "https://upload.wikimedia.org/wikipedia/en/9/9b/Luke_Skywalker.png"
         },
         {
-            name: "han solo",
+            name: "han",
             image: "https://upload.wikimedia.org/wikipedia/en/b/be/Han_Solo_depicted_in_promotional_image_for_Star_Wars_%281977%29.jpg"
         },
         {
@@ -261,12 +262,12 @@ function renderPopChar() {
             image: "https://bamfstyle.com/wp-content/uploads/2019/05/lando-main1.jpg"
         },
         {
-            name: "obi wan",
+            name: "obi",
             image: "https://static.wikia.nocookie.net/starwars/images/4/4e/ObiWanHS-SWE.jpg/revision/latest?cb=20111115052816"
         }
     ]
     initialLoadChar.forEach(character => {
-        fetch(`https://swapi.dev/api/people/?search=${character.name}`)
+        fetch(`https://www.swapi.tech/api/people/?name=${character.name}`)
             .then(res => res.json())
             .then(json => {
                 console.log(json, character.image)
@@ -296,3 +297,4 @@ function init() {
 }
 
 init()
+
