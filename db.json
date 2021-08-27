@@ -1,3 +1,18 @@
 {
-  "characters": []
+  "characters": [
+    {
+      "name": "Boba Fett",
+      "height": "183",
+      "mass": "78.2",
+      "hairColor": "black",
+      "skinColor": "fair",
+      "eyeColor": "brown",
+      "birthYear": "31.5BBY",
+      "gender": "male",
+      "likes": 4,
+      "image": "https://global-uploads.webflow.com/5c4a30834e3cbf8d8d44d1ec/603b5ddf0300cd3f7d6e79e7_a0agvu1033yn67qp239m1maw3dk6h1gx.jpeg",
+      "comment": "",
+      "id": 1
+    }
+  ]
 }
