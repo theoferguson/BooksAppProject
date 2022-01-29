@@ -1,18 +1,32 @@
 {
   "characters": [
     {
-      "name": "Boba Fett",
-      "height": "183",
-      "mass": "78.2",
-      "hairColor": "black",
-      "skinColor": "fair",
+      "name": "Leia Organa",
+      "height": "150",
+      "mass": "49",
+      "hairColor": "brown",
+      "skinColor": "light",
       "eyeColor": "brown",
-      "birthYear": "31.5BBY",
-      "gender": "male",
+      "birthYear": "19BBY",
+      "gender": "female",
       "likes": 4,
-      "image": "https://global-uploads.webflow.com/5c4a30834e3cbf8d8d44d1ec/603b5ddf0300cd3f7d6e79e7_a0agvu1033yn67qp239m1maw3dk6h1gx.jpeg",
+      "image": "https://upload.wikimedia.org/wikipedia/en/1/1b/Princess_Leia%27s_characteristic_hairstyle.jpg",
       "comment": "",
       "id": 1
+    },
+    {
+      "name": "Darth Vader",
+      "height": "202",
+      "mass": "136",
+      "hairColor": "none",
+      "skinColor": "white",
+      "eyeColor": "yellow",
+      "birthYear": "41.9BBY",
+      "gender": "male",
+      "likes": 3,
+      "image": "https://lumiere-a.akamaihd.net/v1/images/Darth-Vader_6bda9114.jpeg?region=0%2C23%2C1400%2C785&width=960",
+      "comment": "",
+      "id": 2
     },
     {
       "name": "Han Solo",
@@ -26,7 +40,7 @@
       "likes": 1,
       "image": "https://upload.wikimedia.org/wikipedia/en/b/be/Han_Solo_depicted_in_promotional_image_for_Star_Wars_%281977%29.jpg",
       "comment": "",
-      "id": 2
+      "id": 3
     }
   ]
 }
